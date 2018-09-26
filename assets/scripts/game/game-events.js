@@ -6,21 +6,34 @@ const gameAPIEvents = require('./game-api-events.js')
 
 // if game tile is not empty, do not allow click to change
 const checkGameCell = function (currentPlayer, gameBoard, gameIndex, gameBoardAPI) {
+  // local checks
   console.log('gameIndex ' + gameIndex)
   console.log('currentPlayer ' + currentPlayer)
-  console.log('gameBoard ' + gameBoard)
-  if (gameBoard[gameIndex] === 'x' || gameBoard[gameIndex] === 'o') {
+  console.log('local gameBoard ' + gameBoard)
+  // if (gameBoard[gameIndex] === 'x' || gameBoard[gameIndex] === 'o') {
+  //   $('.game-alert3').html('Cell is already occupied!').fadeOut(2000, function () {
+  //   // Animation complete.
+  //   })
+  // } else {
+  //   // Update the cell anc call funciton to update game board array
+  //   $(`#${gameIndex}`).html(`${currentPlayer}`)
+  //   updateGameBoard(currentPlayer, gameBoard, gameIndex)
+  // }
+  // api checks
+  console.log('API gameBoard is ' + gameBoardAPI)
+  if (gameBoardAPI[gameIndex] === 'x' || gameBoardAPI[gameIndex] === 'o') {
     $('.game-alert3').html('Cell is already occupied!').fadeOut(2000, function () {
     // Animation complete.
     })
   } else {
     // Update the cell anc call funciton to update game board array
     $(`#${gameIndex}`).html(`${currentPlayer}`)
-    updateGameBoard(currentPlayer, gameBoard, gameIndex)
+    updateGameBoard(currentPlayer, gameBoard, gameIndex, gameBoardAPI)
   }
+
 }
 
-const updateGameBoard = function (currentPlayer, gameBoard, gameIndex) {
+const updateGameBoard = function (currentPlayer, gameBoard, gameIndex, gameBoardAPI) {
   console.log(currentPlayer, gameBoard, gameIndex)
   gameBoard[gameIndex] = currentPlayer
   console.log(gameBoard)
