@@ -4,13 +4,13 @@ const store = require('../store.js')
 const gameEvents = require('../game/game-events.js')
 
 const signUpSuccess = function () {
-  $('#display-message').html('Sign-up successful!')
+  $('#display-message').html('Sign-up successful! Please sign in above.')
   $('#display-message').css('color', 'green')
   $('#sign-up-form').trigger('reset')
 }
 
 const signUpError = function () {
-  $('#display-message').html('Something went wrong!')
+  $('#display-message').html('Something went wrong! Please try signing up again.')
   $('#display-message').css('color', 'red')
   $('#sign-up-form').trigger('reset')
 }
@@ -35,7 +35,7 @@ const signInSuccess = function (response) {
 }
 
 const signInError = function () {
-  $('#display-message').html('Something went wrong!')
+  $('#display-message').html('Something went wrong! Please try signing in again.')
   $('#display-message').css('color', 'red')
   $('#sign-in-form').trigger('reset')
 }
@@ -47,7 +47,7 @@ const changePasswordSuccess = function () {
 }
 
 const changePasswordFailure = function () {
-  $('#display-message').html('Something went wrong with your password change!')
+  $('#display-message').html('Something went wrong with your password change! Please try again.')
   $('#display-message').css('color', 'red')
   $('#sign-in-form').trigger('reset')
 }
