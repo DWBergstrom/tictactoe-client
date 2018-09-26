@@ -13,7 +13,7 @@
     </head>
     <body>
       <form id="sign-up-form">
-        <legend> Sign up here: </legend>
+        <legend> Sign up here to play Tic Tac Toe!: </legend>
         <input required type="email" name="credentials[email]" placeholder="Enter Email" />
         <input required type="password" name="credentials[password]" placeholder="Enter Password" />
         <input required type="password" name="credentials[password_confirmation]" placeholder="Confirm Password" />
@@ -32,8 +32,8 @@
       </form>
 
 
-      <form>
-      <legend> Change password: </legend>
+      <form id="change-password-form" class="hidden">
+        <legend> Change password: </legend>
         <input required type="password" name="passwords[old]" placeholder="Enter Old Password" />
         <input required type="password" name="passwords[new]" placeholder="Enter New Password" />
         <input type="submit" class="btn btn-primary" />
@@ -41,14 +41,15 @@
         <br />
       </form>
 
-
-
       <button id="sign-out-button" class="hidden"> Sign Out </button>
 
       <br />
+      <h3 id="display-message"> </h3>
+
+      <br />
       <br />
 
-      <div class="container">
+      <div class="container game-container hidden">
         <h1>Tic Tac Toe</h1>
         <div class="row">
           <div id="0" class="col-2 box game-board" data-cell-index='0'>  </div>
@@ -72,21 +73,21 @@
     <br />
 
     <div>
-      <button id="reset-game-board" type="button" class="btn btn-primary">Start New Game</button>
+      <button id="reset-game-board" type="button" class="btn btn-primary hidden">Start New Game</button>
     </div>
 
     <br />
     <br />
 
-    <div class="game-alert game-alert1">
+    <div class="game-alert game-alert1 hidden">
         <h3> Click "Start New Game" to start playing!</h3>
     </div>
 
-    <div class="game-alert game-alert2">
+    <div class="game-alert game-alert2 hidden">
         <h3> </h3>
     </div>
 
-    <div class="game-alert game-alert3">
+    <div class="game-alert game-alert3 hidden">
         <h3> </h3>
     </div>
 
