@@ -1,12 +1,15 @@
 
 const store = require('../store.js')
 
+// if game tile is not empty, do not allow click to change
 const checkGameCell = function (currentPlayer, gameBoard, gameIndex) {
   if (gameBoard[gameIndex] === 'x' || gameBoard[gameIndex] === 'o') {
-    $('.game-alert').html('Cell is already occupied!').fadeOut(1000, function () {
+    $('.game-alert1').html('Cell is already occupied!').fadeOut(1000, function () {
     // Animation complete.
     })
-
+  } else {
+    // Update the game board array
+    updateGameBoard(currentPlayer, gameBoard, gameIndex)
   }
 }
 
@@ -14,6 +17,12 @@ const updateGameBoard = function (currentPlayer, gameBoard, gameIndex) {
   console.log(currentPlayer, gameBoard, gameIndex)
   gameBoard[gameIndex] = currentPlayer
   console.log(gameBoard)
+  changePlayer(currentPlayer, gameBoard)
+  // push onto cellsArray <-- use store.js?
+  // send update to the API
+  // make show request from the API for the current cellsArray
+  // and call checkForWin
+  checkForWin(gameBoard, currentPlayer)
 }
 
 const checkForWin = function (gameBoard, currentPlayer) {
@@ -36,22 +45,40 @@ const checkForWin = function (gameBoard, currentPlayer) {
     // test rows
     if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2]) {
       console.log(gameBoard[0] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[3] !== '' && gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5]) {
       console.log(gameBoard[3] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[6] !== '' && gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8]) {
       console.log(gameBoard[6] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
       console.log(gameBoard[0] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[1] !== '' && gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7]) {
       console.log(gameBoard[1] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8]) {
       console.log(gameBoard[2] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
       console.log(gameBoard[0] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6]) {
       console.log(gameBoard[2] + ' wins!')
+      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-board').off('click')
     } else if (gameBoardElements.length === 9) {
       console.log('Draw!  The board is full.')
+      $('.game-alert1').html('Draw!  The board is full.')
+      $('.game-board').off('click')
     }
   } else {
     console.log(gameBoardElements + ' is shorter than 3. continue')
@@ -59,8 +86,8 @@ const checkForWin = function (gameBoard, currentPlayer) {
 
   // if yes, set game to over with update call to API
   // add "you've won" message, update game count, show reset game board option
-  // if no, set currentPlayer to next player and call change game tile on click
 
+  // if no, set currentPlayer to next player and call change game tile on click
   changePlayer(currentPlayer, gameBoard)
 }
 
@@ -79,28 +106,20 @@ const changePlayer = function (currentPlayer, gameBoard) {
     // console.log(currentPlayer + ' after player check')
   }
 
-  // possible parameters:
-  // current cell state (x or o or blank - get html?)
-
-  // if game tile is not empty, do not allow click to change
-  // else if last turn was x, change cell to o and remove click listener
-  // else change cell to x and remove click listener
-
-  // push onto cellsArray <-- use store.js?
-  // send update to the API
-  // make show request from the API for the current cellsArray
-  // and call checkForWin
-
   return currentPlayer
   // checkForWin(gameBoard)
 }
 
 // Create empty board
 const resetGameBoard = function () {
+  console.log(gameUI.cellClicked)
+  $('.game-board').on('click', gameUI.cellClicked)
   // set all cells to blank
   const gameBoard = ['', '', '', '', '', '', '', '', '']
 
   const currentPlayer = 'x' // x for new game. <-- use store.js?
+
+  $('.game-alert1').html('')
 
   // send create call to API
   // retrieve games stats with index call to API

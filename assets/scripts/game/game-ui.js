@@ -4,7 +4,7 @@ const store = require('../store.js')
 
 const cellClicked = function (event) {
   // clear alert div
-  $('.game-alert').html('')
+  $('.game-alert1').html('')
   // set game index variable using the data attribute
   const gameIndex = event.target.getAttribute('data-cell-index')
   // console.log('gameIndex is ' + gameIndex)
@@ -16,11 +16,6 @@ const cellClicked = function (event) {
   // check to make sure game cell is not occupied
   gameEvents.checkGameCell(currentPlayer, gameBoard, gameIndex)
 
-  // should move next lines to events js
-
-  // Update the game board array
-  gameEvents.updateGameBoard(currentPlayer, gameBoard, gameIndex)
-  gameEvents.changePlayer(currentPlayer, gameBoard)
   // console.log('cell 0 clicked - gameUI function')
   // send API call with current index and value
   // change current player
