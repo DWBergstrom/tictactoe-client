@@ -1,6 +1,5 @@
 
 const checkForWin = function (gameBoard) {
-  const gameBoardCoordinates = []
 
   // create a coordinateGrid array to represent the game board
   const coordinateGrid = [
@@ -9,25 +8,36 @@ const checkForWin = function (gameBoard) {
     [2, 0], [2, 1], [2, 2]
   ]
 
-  // check to see which indexes are occupied on the gameBoard
-  // populate another array with occupied gameBoardCoordinates
-  gameBoard.forEach(function (element) {
-    if (gameBoard.indexOf(element) !== 0) {
-      console.log(coordinateGrid[gameBoard.indexOf(element)])
-      gameBoardCoordinates.push(coordinateGrid[gameBoard.indexOf(element)])
-    }
-  })
+  // initialize coordinate array to eventually mesh the game board elements
+  // with the coordinateGrid
+  const gameBoardCoordinates = []
+  for (let i = 0; i < coordinateGrid.length; i++) {
+    gameBoardCoordinates.push(coordinateGrid[i])
+  }
 
+  // console.log(gameBoardCoordinates)
+
+  // map the current game board elements into the gameBoardCoordinates
+  const addGameBoardElements = function () {
+    for (let i = 0; i < gameBoard.length; i++) {
+      // console.log(gameBoard[i])
+      // console.log(gameBoardCoordinates[i])
+      gameBoardCoordinates[i][2] = gameBoard[i]
+    }
+  }
+
+
+  addGameBoardElements()
   console.log(gameBoardCoordinates)
 
   // test to see if fewer than three indexes of of the gameBoard are occupied
   // if no, nobody has won yet
 
-  if (gameBoardCoordinates.length >= 3) {
-    console.log(gameBoardCoordinates + ' is at least 3')
-  } else {
-    console.log(gameBoardCoordinates + ' is shorter than 3')
-  }
+  // if (gameBoardCoordinates.length >= 3) {
+  //   console.log(gameBoardCoordinates + ' is at least 3')
+  // } else {
+  //   console.log(gameBoardCoordinates + ' is shorter than 3')
+  // }
 
   // if yes, test to see if any row, column, or cross on the coordinates grid
   // has the same string
@@ -40,7 +50,7 @@ const checkForWin = function (gameBoard) {
 
 
 
-const changeGameTile = function (currentPlayer) {
+const changeGameTile = function (currentPlayer, gameBoard) {
 
   console.log(currentPlayer)
 
@@ -65,6 +75,7 @@ const changeGameTile = function (currentPlayer) {
   // send update to the API
   // make show request from the API for the current cellsArray
   // and call checkForWin
+  checkForWin(gameBoard)
 }
 
 // Create empty board
@@ -87,4 +98,4 @@ const resetGameBoard = function () {
 
 resetGameBoard()
 
-changeGameTile()
+// changeGameTile()
