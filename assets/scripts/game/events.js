@@ -1,6 +1,6 @@
 
-const checkForWin = function (gameBoard) {
-
+const checkForWin = function (gameBoard, currentPlayer) {
+  console.log(gameBoard, 'current player in checkForWin is ' + currentPlayer)
   // create an array of currently occupied game board elements
   const gameBoardElements = []
 
@@ -21,15 +21,13 @@ const checkForWin = function (gameBoard) {
       console.log(gameBoard[3] + ' wins!')
     } else if (gameBoard[6] !== '' && gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8]) {
       console.log(gameBoard[6] + ' wins!')
-    } // test columns
-    else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
+    } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
       console.log(gameBoard[0] + ' wins!')
     } else if (gameBoard[1] !== '' && gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7]) {
       console.log(gameBoard[1] + ' wins!')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8]) {
       console.log(gameBoard[2] + ' wins!')
-    } // test crosses
-    else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
+    } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
       console.log(gameBoard[0] + ' wins!')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6]) {
       console.log(gameBoard[2] + ' wins!')
@@ -40,31 +38,30 @@ const checkForWin = function (gameBoard) {
     console.log(gameBoardElements + ' is shorter than 3. continue')
   }
 
-    // if yes, set game to over with update call to API
-    // add "you've won" message, update game count, show reset game board option
-    // if no, set currentPlayer to next player and call change game tile on click
+  // if yes, set game to over with update call to API
+  // add "you've won" message, update game count, show reset game board option
+  // if no, set currentPlayer to next player and call change game tile on click
 
-
+  changeGameTile(currentPlayer, gameBoard)
 }
 
-
-
 const changeGameTile = function (currentPlayer, gameBoard) {
-
-  console.log(currentPlayer)
-
   // click listener activates
   // this should be a ui event
   // check whose turn it is (x or o) - save in variable
+
+
+
   if (currentPlayer === 'x') {
     currentPlayer = 'o'
+  } else {
+    currentPlayer = 'x'
   }
 
-  console.log(currentPlayer)
+  console.log('current player in changeGameTile is ' + currentPlayer)
 
   // possible parameters:
-    // current cell state (x or o or blank - get html?)
-
+  // current cell state (x or o or blank - get html?)
 
   // if game tile is not empty, do not allow click to change
   // else if last turn was x, change cell to o and remove click listener
@@ -74,26 +71,25 @@ const changeGameTile = function (currentPlayer, gameBoard) {
   // send update to the API
   // make show request from the API for the current cellsArray
   // and call checkForWin
+  return currentPlayer
   checkForWin(gameBoard)
 }
 
 // Create empty board
 const resetGameBoard = function () {
   // set all cells to blank
-  const gameBoard = ['x', '', '', '', 'x', '', 'o', 'x', 'x']
+  const gameBoard = ['', '', '', '', '', '', '', '', '']
 
-  const currentPlayer = 'x' // x or o.  if new game, always x <-- use store.js?
+  const currentPlayer = 'o' // x for new game. <-- use store.js?
 
-  console.log(gameBoard, currentPlayer)
+  // console.log(gameBoard, currentPlayer)
 
-  checkForWin(gameBoard)
+  checkForWin(gameBoard, currentPlayer)
 
   // send create call to API
   // retrieve games stats with index call to API
-
-  return currentPlayer
 }
 
 resetGameBoard()
 
-// changeGameTile()
+// checkForWin(['x', '', '', '', 'o', '', 'o', 'x', 'x'])
