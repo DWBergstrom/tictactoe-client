@@ -1,5 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+  background-color: #F0F8FF;
+}
 
 .box {
   align-items: center;
@@ -8,4 +11,9 @@
   display: flex;
   height: 100px;
   justify-content: center;
+}
+
+.game-alert {
+  background-color: red;
+  display: inline;
 }

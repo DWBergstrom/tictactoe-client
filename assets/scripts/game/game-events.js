@@ -49,42 +49,42 @@ const checkForWin = function (gameBoard, currentPlayer) {
     if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[3] !== '' && gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5]) {
       console.log(gameBoard[3] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[6] !== '' && gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8]) {
       console.log(gameBoard[6] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[1] !== '' && gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7]) {
       console.log(gameBoard[1] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8]) {
       console.log(gameBoard[2] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6]) {
       console.log(gameBoard[2] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!`)
+      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
     } else if (gameBoardElements.length === 9) {
       console.log('Draw!  The board is full.')
