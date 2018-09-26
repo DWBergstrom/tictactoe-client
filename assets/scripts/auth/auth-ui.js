@@ -57,6 +57,7 @@ const signOutSuccess = function () {
   $('#display-message').html('Sign out successful!').fadeOut(4000)
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
+  $('#display-message').show()
   $('#sign-up-form').removeClass('hidden')
   $('#sign-in-form').removeClass('hidden')
   $('#change-password-form').addClass('hidden')
@@ -65,6 +66,8 @@ const signOutSuccess = function () {
   $('#reset-game-board').addClass('hidden')
   $('.game-alert').addClass('hidden')
   $('.game-details').addClass('hidden')
+  $('.game-stats').addClass('hidden')
+  $('#games-played').addClass('hidden')
 }
 
 const signOutFailure = function () {

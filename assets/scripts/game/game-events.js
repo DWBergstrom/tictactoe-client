@@ -16,6 +16,8 @@ const checkGameCell = function (currentPlayer, gameIndex, gameBoardAPI) {
     $(`#${gameIndex}`).html(`${currentPlayer}`)
     updateGameBoard(currentPlayer, gameIndex, gameBoardAPI)
   }
+  console.log(store.game.cells, ' store.game.cells after checkGameCell function')
+  console.log(gameBoardAPI, ' after checkGameCell function')
 }
 
 const updateGameBoard = function (currentPlayer, gameIndex, gameBoardAPI) {
