@@ -3,7 +3,10 @@ const store = require('../store.js')
 
 const checkGameCell = function (currentPlayer, gameBoard, gameIndex) {
   if (gameBoard[gameIndex] === 'x' || gameBoard[gameIndex] === 'o') {
-    $('.game-alert').html('Cell is already occupied!')
+    $('.game-alert').html('Cell is already occupied!').fadeOut(1000, function () {
+    // Animation complete.
+    })
+
   }
 }
 

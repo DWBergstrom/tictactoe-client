@@ -3,6 +3,8 @@ const gameEvents = require('./game-events.js')
 const store = require('../store.js')
 
 const cellClicked = function (event) {
+  // clear alert div
+  $('.game-alert').html('')
   // set game index variable using the data attribute
   const gameIndex = event.target.getAttribute('data-cell-index')
   // console.log('gameIndex is ' + gameIndex)
@@ -13,6 +15,9 @@ const cellClicked = function (event) {
   $(`#${gameIndex}`).html(`${currentPlayer}`)
   // check to make sure game cell is not occupied
   gameEvents.checkGameCell(currentPlayer, gameBoard, gameIndex)
+
+  // should move next lines to events js
+
   // Update the game board array
   gameEvents.updateGameBoard(currentPlayer, gameBoard, gameIndex)
   gameEvents.changePlayer(currentPlayer, gameBoard)
