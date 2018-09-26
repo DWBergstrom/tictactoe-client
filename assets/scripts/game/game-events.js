@@ -1,8 +1,11 @@
+'use strict'
 
 const store = require('../store.js')
+const gameAPI = require('./game-api.js')
+const gameAPIEvents = require('./game-api-events.js')
 
 // if game tile is not empty, do not allow click to change
-const checkGameCell = function (currentPlayer, gameBoard, gameIndex) {
+const checkGameCell = function (currentPlayer, gameBoard, gameIndex, gameBoardAPI) {
   console.log('gameIndex ' + gameIndex)
   console.log('currentPlayer ' + currentPlayer)
   console.log('gameBoard ' + gameBoard)
@@ -44,8 +47,8 @@ const checkForWin = function (gameBoard, currentPlayer) {
   // if yes, test to see if any row, column, or cross on the coordinates grid
   // has the same string
   if (gameBoardElements.length >= 3) {
-    console.log(gameBoardElements + ' is at least 3')
-    // test rows
+    // console.log(gameBoardElements + ' is at least 3')
+    // test rows, columns, then crosses, then for draw
     if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
@@ -95,7 +98,7 @@ const checkForWin = function (gameBoard, currentPlayer) {
       changePlayer(currentPlayer, gameBoard)
     }
   } else {
-    console.log(gameBoardElements + ' is shorter than 3. continue')
+    // console.log(gameBoardElements + ' is shorter than 3. continue')
     changePlayer(currentPlayer, gameBoard)
   }
   // if yes, set game to over with update call to API
@@ -125,22 +128,22 @@ const changePlayer = function (currentPlayer, gameBoard) {
   // checkForWin(gameBoard)
 }
 
-const cellClicked = function (event, resetAlertText) {
-  // clear alert div with callback
-
+const cellClicked = function (event) {
+  // console.log('API playerID in cellClicked is ' + store.game.player_x.id)
   // set game index variable using the data attribute
   const gameIndex = event.target.getAttribute('data-cell-index')
   console.log('gameIndex is ' + gameIndex)
-  // get currentPlayer and board
+  // get local currentPlayer and board
   const currentPlayer = store.gameState.player
-  console.log(currentPlayer + ' cp in cell clicked before html')
+  console.log(currentPlayer + ' local cp in cell clicked before html')
   const gameBoard = store.gameState.board
-  console.log(gameBoard + ' gb in cell clicked before html')
+  console.log(gameBoard + ' local gb in cell clicked before html')
+  const gameBoardAPI = store.game.cells
 
   store.gameState.gameIndex = gameIndex
   // console.log(store.gameState.gameIndex)
   // check to make sure game cell is not occupied
-  checkGameCell(currentPlayer, gameBoard, store.gameState.gameIndex)
+  checkGameCell(currentPlayer, gameBoard, store.gameState.gameIndex, gameBoardAPI)
 
   // send API call with current index and value
   // change current player
@@ -150,7 +153,8 @@ const cellClicked = function (event, resetAlertText) {
 const resetGameBoard = function () {
   $('.game-board').off('click')
   $('.game-board').on('click', cellClicked)
-  // set all cells to blank
+
+  // local game:  set all cells to blank
   const gameBoard = ['', '', '', '', '', '', '', '', '']
 
   const currentPlayer = 'x' // x for new game. <-- use store.js?
@@ -160,20 +164,19 @@ const resetGameBoard = function () {
   $('.game-alert3').html('')
   $('.game-alert1').html(`It is ${currentPlayer}'s turn`)
 
-  // send create call to API
-  // retrieve games stats with index call to API
-
+  // local game:  create object in store
   store.gameState = {
     board: gameBoard,
     player: currentPlayer
   }
 
+  // send create call to API
+  gameAPI.createGame()
+    .then(gameAPIEvents.newGameCreated)
+    .catch(console.log)
+
   return store.gameState
 }
-
-// resetGameBoard()
-
-// checkForWin(['x', '', '', '', 'o', '', 'o', 'x', 'x'])
 
 module.exports = {
   resetGameBoard,
