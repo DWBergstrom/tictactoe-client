@@ -1,5 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 
-.col-2 {
+
+.box {
+  align-items: center;
   border: 2px solid black;
+  color: black;
+  display: flex;
+  height: 100px;
+  justify-content: center;
 }

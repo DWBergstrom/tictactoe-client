@@ -1,6 +1,22 @@
 
+const store = require('../store.js')
+
+const checkGameCell = function (currentPlayer, gameBoard, gameIndex) {
+  if (gameBoard[gameIndex] === 'x' || gameBoard[gameIndex] === 'o') {
+    $('.game-alert').html('Cell is already occupied!')
+  }
+}
+
+const updateGameBoard = function (currentPlayer, gameBoard, gameIndex) {
+  console.log(currentPlayer, gameBoard, gameIndex)
+  gameBoard[gameIndex] = currentPlayer
+  console.log(gameBoard)
+}
+
 const checkForWin = function (gameBoard, currentPlayer) {
-  console.log(gameBoard, 'current player in checkForWin is ' + currentPlayer)
+  // check if cell is occupied
+
+  console.log('current gameBoard in checkForWin is ' + gameBoard, 'current player in checkForWin is ' + currentPlayer)
   // create an array of currently occupied game board elements
   const gameBoardElements = []
 
@@ -42,21 +58,23 @@ const checkForWin = function (gameBoard, currentPlayer) {
   // add "you've won" message, update game count, show reset game board option
   // if no, set currentPlayer to next player and call change game tile on click
 
-  changeGameTile(currentPlayer, gameBoard)
+  changePlayer(currentPlayer, gameBoard)
 }
 
-const changeGameTile = function (currentPlayer, gameBoard) {
+const changePlayer = function (currentPlayer, gameBoard) {
   // click listener activates
   // this should be a ui event
   // check whose turn it is (x or o) - save in variable
 
-  if (currentPlayer === 'x') {
-    currentPlayer = 'o'
-  } else {
-    currentPlayer = 'x'
-  }
+  // console.log('current player & gameboard in changePlayer ' + currentPlayer, gameBoard)
 
-  // console.log('current player in changeGameTile is ' + currentPlayer)
+  if (currentPlayer === 'x') {
+    store.gameState.player = 'o'
+    // console.log(currentPlayer + ' after player check')
+  } else {
+    store.gameState.player = 'x'
+    // console.log(currentPlayer + ' after player check')
+  }
 
   // possible parameters:
   // current cell state (x or o or blank - get html?)
@@ -69,6 +87,7 @@ const changeGameTile = function (currentPlayer, gameBoard) {
   // send update to the API
   // make show request from the API for the current cellsArray
   // and call checkForWin
+
   return currentPlayer
   // checkForWin(gameBoard)
 }
@@ -78,14 +97,17 @@ const resetGameBoard = function () {
   // set all cells to blank
   const gameBoard = ['', '', '', '', '', '', '', '', '']
 
-  const currentPlayer = 'o' // x for new game. <-- use store.js?
-
-  // console.log(gameBoard, currentPlayer)
-
-  checkForWin(gameBoard, currentPlayer)
+  const currentPlayer = 'x' // x for new game. <-- use store.js?
 
   // send create call to API
   // retrieve games stats with index call to API
+
+  store.gameState = {
+    board: gameBoard,
+    player: currentPlayer
+  }
+
+  return store.gameState
 }
 
 // resetGameBoard()
@@ -94,6 +116,8 @@ const resetGameBoard = function () {
 
 module.exports = {
   resetGameBoard,
-  changeGameTile,
-  checkForWin
+  changePlayer,
+  checkForWin,
+  updateGameBoard,
+  checkGameCell
 }
