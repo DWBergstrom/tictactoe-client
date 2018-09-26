@@ -31,6 +31,7 @@ const signInSuccess = function (response) {
   $('#reset-game-board').removeClass('hidden')
   $('.game-alert').removeClass('hidden')
   $('.game-details').removeClass('hidden')
+  $('#games-played').removeClass('hidden')
 }
 
 const signInError = function () {

@@ -3,6 +3,7 @@
 const store = require('../store.js')
 const gameAPI = require('./game-api.js')
 const gameAPIEvents = require('./game-api-events.js')
+const gameAlertUI = require('./game-alert-ui.js')
 
 // if game tile is not empty, do not allow click to change
 const checkGameCell = function (currentPlayer, gameIndex, gameBoardAPI) {
@@ -200,8 +201,8 @@ const resetGameBoard = function () {
 // get details about games played for current player ID
 const getGames = function () {
   // request from the API for the current cellsArray
-  gameAPI.getGame(store.game.id)
-    .then(gameAPIEvents.gameState)
+  gameAPI.getGames()
+    .then(gameAlertUI.showGamesPlayed)
     .catch(console.log)
 }
 

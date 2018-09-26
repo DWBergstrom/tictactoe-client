@@ -61,9 +61,20 @@ const getGame = function (GAMEID) {
   })
 }
 
+const getGames = function () {
+  return $.ajax({
+    url: config.apiUrl + '/games/',
+    headers: {
+      'Authorization': `Token token=${store.user.token}`
+    },
+    method: 'GET'
+  })
+}
+
 module.exports = {
   createGame,
   updateGame,
+  finishGame,
   getGame,
-  finishGame
+  getGames
 }
