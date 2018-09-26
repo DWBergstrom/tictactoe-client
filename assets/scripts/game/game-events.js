@@ -88,6 +88,12 @@ const resetGameBoard = function () {
   // retrieve games stats with index call to API
 }
 
-resetGameBoard()
+// resetGameBoard()
 
 // checkForWin(['x', '', '', '', 'o', '', 'o', 'x', 'x'])
+
+module.exports = {
+  resetGameBoard,
+  changeGameTile,
+  checkForWin
+}

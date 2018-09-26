@@ -3,7 +3,7 @@ const gameEvents = require('./game-events.js')
 
 const cellClicked = function (event) {
   // get currentPlayer
-  const currentPlayer = gameEvents.changeGameTile
+  const currentPlayer = gameEvents.changeGameTile()
   console.log('current player in changeGameTile is ' + currentPlayer)
   console.log('cell 0 clicked - function')
   const gameIndex = event.target.getAttribute('data-cell-index')
