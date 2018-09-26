@@ -25,6 +25,12 @@ const newGameCreated = function (response) {
   return store.game
 }
 
+const gameState = function (response) {
+  store.game.cells = response.game.cells
+  console.log(store.game.cells, ' in gameState check')
+}
+
 module.exports = {
-  newGameCreated
+  newGameCreated,
+  gameState
 }
