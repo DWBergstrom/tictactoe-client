@@ -7,7 +7,7 @@ const checkGameCell = function (currentPlayer, gameBoard, gameIndex) {
   console.log('currentPlayer ' + currentPlayer)
   console.log('gameBoard ' + gameBoard)
   if (gameBoard[gameIndex] === 'x' || gameBoard[gameIndex] === 'o') {
-    $('.game-alert1').html('Cell is already occupied!').fadeOut(2000, function () {
+    $('.game-alert3').html('Cell is already occupied!').fadeOut(2000, function () {
     // Animation complete.
     })
   } else {
@@ -48,50 +48,60 @@ const checkForWin = function (gameBoard, currentPlayer) {
     // test rows
     if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2]) {
       console.log(gameBoard[0] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[3] !== '' && gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5]) {
       console.log(gameBoard[3] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[6] !== '' && gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8]) {
       console.log(gameBoard[6] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
       console.log(gameBoard[0] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[1] !== '' && gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7]) {
       console.log(gameBoard[1] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8]) {
       console.log(gameBoard[2] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
       console.log(gameBoard[0] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6]) {
       console.log(gameBoard[2] + ' wins!')
-      $('.game-alert1').html(`${currentPlayer} wins!`)
+      $('.game-alert1').html('')
+      $('.game-alert2').html(`${currentPlayer} wins!`)
       $('.game-board').off('click')
     } else if (gameBoardElements.length === 9) {
       console.log('Draw!  The board is full.')
-      $('.game-alert2').html('Draw!  The board is full.')
+      $('.game-alert1').html('')
+      $('.game-alert2').html('Draw!  The board is full.  Click "Start New Game" to play again.')
       $('.game-board').off('click')
+    } else {
+      changePlayer(currentPlayer, gameBoard)
     }
   } else {
     console.log(gameBoardElements + ' is shorter than 3. continue')
+    changePlayer(currentPlayer, gameBoard)
   }
-
   // if yes, set game to over with update call to API
   // add "you've won" message, update game count, show reset game board option
 
   // if no, set currentPlayer to next player and call change game tile on click
-  changePlayer(currentPlayer, gameBoard)
 }
 
 const changePlayer = function (currentPlayer, gameBoard) {
@@ -103,9 +113,11 @@ const changePlayer = function (currentPlayer, gameBoard) {
 
   if (currentPlayer === 'x') {
     store.gameState.player = 'o'
+    $('.game-alert1').html(`It is ${store.gameState.player}'s turn`)
     // console.log(currentPlayer + ' after player check')
   } else {
     store.gameState.player = 'x'
+    $('.game-alert1').html(`It is ${store.gameState.player}'s turn`)
     // console.log(currentPlayer + ' after player check')
   }
 
@@ -145,6 +157,8 @@ const resetGameBoard = function () {
 
   $('.game-alert1').html('')
   $('.game-alert2').html('')
+  $('.game-alert3').html('')
+  $('.game-alert1').html(`It is ${currentPlayer}'s turn`)
 
   // send create call to API
   // retrieve games stats with index call to API
