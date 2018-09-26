@@ -50,15 +50,13 @@ const changeGameTile = function (currentPlayer, gameBoard) {
   // this should be a ui event
   // check whose turn it is (x or o) - save in variable
 
-
-
   if (currentPlayer === 'x') {
     currentPlayer = 'o'
   } else {
     currentPlayer = 'x'
   }
 
-  console.log('current player in changeGameTile is ' + currentPlayer)
+  // console.log('current player in changeGameTile is ' + currentPlayer)
 
   // possible parameters:
   // current cell state (x or o or blank - get html?)
@@ -72,7 +70,7 @@ const changeGameTile = function (currentPlayer, gameBoard) {
   // make show request from the API for the current cellsArray
   // and call checkForWin
   return currentPlayer
-  checkForWin(gameBoard)
+  // checkForWin(gameBoard)
 }
 
 // Create empty board
