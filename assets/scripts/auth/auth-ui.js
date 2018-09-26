@@ -17,7 +17,7 @@ const signUpError = function () {
 
 const signInSuccess = function (response) {
   $('#display-message').show()
-  $('#display-message').html('Sign-in successful!')
+  $('#display-message').html('Sign-in successful!').fadeOut(5000)
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
   store.user = response.user
@@ -30,6 +30,7 @@ const signInSuccess = function (response) {
   $('.game-container').removeClass('hidden')
   $('#reset-game-board').removeClass('hidden')
   $('.game-alert').removeClass('hidden')
+  $('.game-details').removeClass('hidden')
 }
 
 const signInError = function () {
@@ -51,6 +52,7 @@ const changePasswordFailure = function () {
 }
 
 const signOutSuccess = function () {
+  $('#display-message').show()
   $('#display-message').html('Sign out successful!').fadeOut(4000)
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
@@ -61,6 +63,7 @@ const signOutSuccess = function () {
   $('.game-container').addClass('hidden')
   $('#reset-game-board').addClass('hidden')
   $('.game-alert').addClass('hidden')
+  $('.game-details').addClass('hidden')
 }
 
 const signOutFailure = function () {
