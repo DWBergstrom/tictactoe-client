@@ -10,9 +10,10 @@ const checkGameCell = function (currentPlayer, gameIndex, gameBoardAPI) {
   // check if cell is occupied
   console.log('API gameBoard is ' + gameBoardAPI)
   if (gameBoardAPI[gameIndex] === 'x' || gameBoardAPI[gameIndex] === 'o') {
-    $('.game-alert3').html('Cell is already occupied!').fadeOut(5000)
+    $('.game-alert3').show()
+    $('.game-alert3').html('Cell is already occupied!').fadeOut(1000)
   } else {
-    // Update the cell anc call funciton to update game board array
+    // Update the cell and call funciton to update game board array
     $(`#${gameIndex}`).html(`${currentPlayer}`)
     updateGameBoard(currentPlayer, gameIndex, gameBoardAPI)
   }
@@ -27,7 +28,7 @@ const updateGameBoard = function (currentPlayer, gameIndex, gameBoardAPI) {
 
   // send update to the API
   gameAPI.updateGame(store.game.id, gameIndex, currentPlayer)
-    .then(console.log)
+    .then(gameAPIEvents.gamePatchSuccessful)
     .catch(console.log)
 
   // call checkForWin
@@ -55,7 +56,7 @@ const checkForWin = function (currentPlayer) {
     if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -63,7 +64,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[3] !== '' && gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5]) {
       console.log(gameBoard[3] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -71,7 +72,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[6] !== '' && gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8]) {
       console.log(gameBoard[6] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -79,7 +80,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -87,7 +88,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[1] !== '' && gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7]) {
       console.log(gameBoard[1] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -95,7 +96,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8]) {
       console.log(gameBoard[2] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -103,7 +104,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
       console.log(gameBoard[0] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -111,7 +112,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6]) {
       console.log(gameBoard[2] + ' wins!')
       $('.game-alert1').html('')
-      $('.game-alert2').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "Start New Game" to play again.`)
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -119,7 +120,7 @@ const checkForWin = function (currentPlayer) {
     } else if (gameBoardElements.length === 9) {
       console.log('Draw!  The board is full.')
       $('.game-alert1').html('')
-      $('.game-alert2').html('Draw!  The board is full.  Click "Start New Game" to play again.')
+      $('.game-alert3').html('Draw!  The board is full.  Click "Start New Game" to play again.')
       $('.game-board').off('click')
       gameAPI.finishGame(store.game.id)
         .then(console.log)
@@ -195,7 +196,7 @@ const resetGameBoard = function () {
   // send create call to API
   gameAPI.createGame()
     .then(gameAPIEvents.newGameCreated)
-    .catch(console.log)
+    .catch(gameAPIEvents.newGameCreatedFailure)
 
   return store.gameState
 }
@@ -205,7 +206,7 @@ const getGames = function () {
   // request from the API for the current cellsArray
   gameAPI.getGames()
     .then(gameAlertUI.showGamesPlayed)
-    .catch(console.log)
+    .catch(gameAlertUI.showGamesPlayedFailure)
 }
 
 module.exports = {

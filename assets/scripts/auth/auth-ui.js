@@ -4,13 +4,15 @@ const store = require('../store.js')
 const gameEvents = require('../game/game-events.js')
 
 const signUpSuccess = function () {
+  $('#display-message').show()
   $('#display-message').html('Sign-up successful! Please sign in above.')
   $('#display-message').css('color', 'green')
   $('#sign-up-form').trigger('reset')
 }
 
 const signUpError = function () {
-  $('#display-message').html('Something went wrong! Please try signing up again.')
+  $('#display-message').show()
+  $('#display-message').html('Something went wrong! Please try signing up again.').fadeOut(5000)
   $('#display-message').css('color', 'red')
   $('#sign-up-form').trigger('reset')
 }
@@ -35,21 +37,26 @@ const signInSuccess = function (response) {
 }
 
 const signInError = function () {
-  $('#display-message').html('Something went wrong! Please try signing in again.')
+  $('#display-message').show()
+  $('#display-message').html('Something went wrong! Please try signing in again.').fadeOut(5000)
   $('#display-message').css('color', 'red')
   $('#sign-in-form').trigger('reset')
 }
 
 const changePasswordSuccess = function () {
-  $('#display-message').html('Password change successful!')
+  $('#display-message').show()
+  $('#display-message').html('Password change successful!').fadeOut(5000)
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
+  $('#change-password-form').trigger('reset')
 }
 
 const changePasswordFailure = function () {
-  $('#display-message').html('Something went wrong with your password change! Please try again.')
+  $('#display-message').show()
+  $('#display-message').html('Something went wrong with your password change! Please try again.').fadeOut(5000)
   $('#display-message').css('color', 'red')
   $('#sign-in-form').trigger('reset')
+  $('#change-password-form').trigger('reset')
 }
 
 const signOutSuccess = function () {
@@ -71,7 +78,8 @@ const signOutSuccess = function () {
 }
 
 const signOutFailure = function () {
-  $('#display-message').html('Something went wrong signing out!')
+  $('#display-message').show()
+  $('#display-message').html('Something went wrong signing out! Check your network connection.')
   $('#display-message').css('color', 'red')
   $('#sign-in-form').trigger('reset')
 }

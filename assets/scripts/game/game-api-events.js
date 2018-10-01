@@ -13,7 +13,8 @@ const newGameCreated = function (response) {
 
   // store the current game ID to display while playing
   store.game.id = response.game.id
-  $('.game-id').html(`${store.game.id}`)
+  $('.game-id').html(`Your new game ID is: ${store.game.id}`)
+  $('.game-id').css('color', 'black')
   console.log('game id is ', store.game.id)
 
   // store the game state (over is true or false)
@@ -27,6 +28,22 @@ const newGameCreated = function (response) {
   return store.game
 }
 
+const newGameCreatedFailure = function () {
+  $('.game-id').html('There was a problem creating a new game on the server.  Please check your network connection and click "Start new game" again.')
+  $('.game-id').css('color', 'red')
+  $('.game-board').off('click')
+}
+
+const gamePatchSuccessful = function () {
+  $('.game-alert2').show()
+  $('.game-alert2').html('Game updated on server.').fadeOut(1000)
+}
+
+const gamePatchUnSuccessful = function () {
+  $('.game-alert2').show()
+  $('.game-alert2').html('There was a problem updating the game on the server.').fadeOut(1000)
+}
+
 const gameState = function (response) {
   store.game.cells = response.game.cells
   console.log(store.game.cells, ' in gameState check')
@@ -34,5 +51,8 @@ const gameState = function (response) {
 
 module.exports = {
   newGameCreated,
+  newGameCreatedFailure,
+  gamePatchSuccessful,
+  gamePatchUnSuccessful,
   gameState
 }
