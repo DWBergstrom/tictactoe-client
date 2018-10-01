@@ -29,7 +29,7 @@ const newGameCreated = function (response) {
 }
 
 const newGameCreatedFailure = function () {
-  $('.game-id').html('There was a problem creating a new game on the server.  Please check your network connection and click "Start new game" again.')
+  $('.game-id').html('There was a problem creating a new game on the server.  Please check your network connection and click "New Game" again.')
   $('.game-id').css('color', 'red')
   $('.game-board').off('click')
 }

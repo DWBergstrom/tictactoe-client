@@ -23,7 +23,7 @@ const signInSuccess = function (response) {
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
   $('#display-message2').show()
-  $('.display-message2').html('Click "Start New Game" to start playing!')
+  $('.display-message2').html('Click "New Game" to start playing!')
   store.user = response.user
   $('#sign-up-form').addClass('hidden')
   $('#sign-in-form').addClass('hidden')

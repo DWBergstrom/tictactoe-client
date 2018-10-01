@@ -50,15 +50,18 @@ body {
 }
 
 .alert-container {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0 auto;
+  margin-right: 0 auto;
   width: 100%;
 }
 
 .game-alert {
   // background-color: #ffe3ae;
   border: 0;
-  font-size: 20px;
+  font-size: 15px;
+  height: 150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
