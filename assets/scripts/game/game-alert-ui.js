@@ -14,7 +14,20 @@ const showGamesPlayedFailure = function (response) {
   $('.games').css('color', 'red')
 }
 
+const gameFinishSuccess = function () {
+  $('.game-alert4').show()
+  $('.game-alert4').html('Your finished game was saved to the server :) ')
+}
+
+const gameFinishFailure = function () {
+  $('.game-alert3').html('')
+  $('.game-alert4').show()
+  $('.game-alert4').html('There was a problem saving your finished game was saved to the server :(  Please check your network connection and start a new game. ')
+}
+
 module.exports = {
   showGamesPlayed,
-  showGamesPlayedFailure
+  showGamesPlayedFailure,
+  gameFinishSuccess,
+  gameFinishFailure
 }

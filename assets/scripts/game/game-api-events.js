@@ -36,12 +36,14 @@ const newGameCreatedFailure = function () {
 
 const gamePatchSuccessful = function () {
   $('.game-alert2').show()
-  $('.game-alert2').html('Game updated on server.').fadeOut(1000)
+  $('.game-alert2').html('Game updated on server.').fadeOut(1500)
 }
 
 const gamePatchUnSuccessful = function () {
+  $('.game-alert3').html('')
   $('.game-alert2').show()
-  $('.game-alert2').html('There was a problem updating the game on the server.').fadeOut(1000)
+  $('.game-alert2').html('There was a problem updating the game on the server. Please check your network connection and start a new game.')
+  $('.game-board').off('click')
 }
 
 const gameState = function (response) {
