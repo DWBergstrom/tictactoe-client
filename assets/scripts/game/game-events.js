@@ -197,6 +197,8 @@ const resetGameBoard = function () {
     player: currentPlayer
   }
 
+  $('.game-container').removeClass('hidden')
+  $('.display-message2').html('')
   $('.game-alert1').html('')
   $('.game-alert2').html('')
   $('.game-alert3').html('')

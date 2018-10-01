@@ -22,14 +22,17 @@ const signInSuccess = function (response) {
   $('#display-message').html('Sign-in successful!').fadeOut(5000)
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
+  $('#display-message2').show()
+  $('.display-message2').html('Click "Start New Game" to start playing!')
   store.user = response.user
   $('#sign-up-form').addClass('hidden')
   $('#sign-in-form').addClass('hidden')
   $('#change-password-form').removeClass('hidden')
   $('.game-board').html('')
-  gameEvents.resetGameBoard()
+  // gameEvents.resetGameBoard()
+  $('.game-title').removeClass('hidden')
   $('#sign-out-button').removeClass('hidden')
-  $('.game-container').removeClass('hidden')
+  // $('.game-container').removeClass('hidden')
   $('#reset-game-board').removeClass('hidden')
   $('.game-alert').removeClass('hidden')
   $('.game-details').removeClass('hidden')
@@ -75,6 +78,11 @@ const signOutSuccess = function () {
   $('.game-details').addClass('hidden')
   $('.game-stats').addClass('hidden')
   $('#games-played').addClass('hidden')
+  $('.game-title').addClass('hidden')
+  $('.game-alert1').html('')
+  $('.game-alert2').html('')
+  $('.game-alert3').html('')
+  $('.game-alert4').html('')
 }
 
 const signOutFailure = function () {

@@ -36,7 +36,7 @@ const newGameCreatedFailure = function () {
 
 const gamePatchSuccessful = function () {
   $('.game-alert2').show()
-  $('.game-alert2').html('Game updated on server.').fadeOut(1500)
+  $('.game-alert2').html('Game updated on server.').fadeOut(1000)
 }
 
 const gamePatchUnSuccessful = function () {
