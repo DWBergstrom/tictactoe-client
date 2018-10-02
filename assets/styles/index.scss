@@ -1,7 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
 
+$black: #000;
+$cloud-blue: #f0f8ff;
+
 body {
-  background-color: #F0F8FF;
+  background-color: $cloud-blue;
   margin: 50px;
   text-align: center;
 }
@@ -9,7 +12,7 @@ body {
 .game-board-wrapper {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 60%;
 }
 
 .game-board {
@@ -18,8 +21,8 @@ body {
 
 .box {
   align-items: center;
-  border: 2px solid black;
-  color: black;
+  border: 2px solid $black;
+  color: $black;
   display: flex;
   height: 100px;
   justify-content: center;
@@ -37,10 +40,10 @@ body {
 }
 
 .title {
+  justify-content: left;
   margin-left: auto;
   margin-right: auto;
   width: 70%;
-  justify-content: left;
 }
 
 .game-container {
@@ -52,19 +55,18 @@ body {
 .alert-container {
   margin-left: 0 auto;
   margin-right: 0 auto;
-  width: 100%;
+  width: 70%;
 }
 
 .game-alert {
-  // background-color: #ffe3ae;
+  align-items: center;
   border: 0;
+  display: flex;
   font-size: 15px;
   height: 150px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
   justify-content: center;
-  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .hidden {

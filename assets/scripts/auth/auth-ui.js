@@ -22,6 +22,7 @@ const signInSuccess = function (response) {
   $('#display-message').html('Sign-in successful!').fadeOut(5000)
   $('#display-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
+  $('#change-password-form').trigger('reset')
   $('#display-message2').show()
   $('.display-message2').html('Click "New Game" to start playing!')
   store.user = response.user
@@ -30,6 +31,7 @@ const signInSuccess = function (response) {
   $('#change-password-form').removeClass('hidden')
   $('.game-board').html('')
   // gameEvents.resetGameBoard()
+  $('.display-message2').removeClass('hidden')
   $('.game-title').removeClass('hidden')
   $('#sign-out-button').removeClass('hidden')
   // $('.game-container').removeClass('hidden')
@@ -47,17 +49,17 @@ const signInError = function () {
 }
 
 const changePasswordSuccess = function () {
-  $('#display-message').show()
-  $('#display-message').html('Password change successful!').fadeOut(5000)
-  $('#display-message').css('color', 'green')
+  $('#password-message').show()
+  $('#password-message').html('Password change successful!').fadeOut(5000)
+  $('#password-message').css('color', 'green')
   $('#sign-in-form').trigger('reset')
   $('#change-password-form').trigger('reset')
 }
 
 const changePasswordFailure = function () {
-  $('#display-message').show()
-  $('#display-message').html('Something went wrong with your password change! Please try again.').fadeOut(5000)
-  $('#display-message').css('color', 'red')
+  $('#password-message').show()
+  $('#password-message').html('Something went wrong with your password change! Please try again.').fadeOut(5000)
+  $('#password-message').css('color', 'red')
   $('#sign-in-form').trigger('reset')
   $('#change-password-form').trigger('reset')
 }
@@ -70,6 +72,7 @@ const signOutSuccess = function () {
   $('#display-message').show()
   $('#sign-up-form').removeClass('hidden')
   $('#sign-in-form').removeClass('hidden')
+  $('.display-message2').addClass('hidden')
   $('#change-password-form').addClass('hidden')
   $('#sign-out-button').addClass('hidden')
   $('.game-container').addClass('hidden')
