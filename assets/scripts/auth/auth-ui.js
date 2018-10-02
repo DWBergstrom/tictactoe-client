@@ -4,7 +4,7 @@ const store = require('../store.js')
 
 const signUpSuccess = function () {
   $('#display-message').show()
-  $('#display-message').html('Sign-up successful! Please sign in above.')
+  $('#display-message').html('Sign-up successful! Please sign in.')
   $('#display-message').css('color', 'green')
   $('#sign-up-form').trigger('reset')
 }
