@@ -3,6 +3,7 @@
 const showGamesPlayed = function (response) {
   const gamesPlayed = response.games.length
   $('.game-stats').removeClass('hidden')
+  $('.game-id').show()
   $('.games').html(`${gamesPlayed}`)
   $('.games').css('color', 'black')
 }

@@ -83,6 +83,7 @@ const signOutSuccess = function () {
   $('.game-alert2').html('')
   $('.game-alert3').html('')
   $('.game-alert4').html('')
+  $('.game-id').html('')
 }
 
 const signOutFailure = function () {
