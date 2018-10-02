@@ -1,7 +1,7 @@
 'use strict'
 
 const store = require('../store.js')
-const gameEvents = require('../game/game-events.js')
+// const gameEvents = require('../game/game-events.js')
 
 const signUpSuccess = function () {
   $('#display-message').show()
