@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tic Tac Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <div class="col-4 box sign-out"><h2 id="display-message"></h2></div>
+      <form id="sign-up-form">
+        <legend> Sign up here to play Tic Tac Toe! </legend>
+        <input required type="email" name="credentials[email]" placeholder="Enter Email" />
+        <input required type="password" name="credentials[password]" placeholder="Enter Password" />
+        <input required type="password" name="credentials[password_confirmation]" placeholder="Confirm Password" />
+        <input type="submit" class="btn btn-primary" />
+        <br />
+      </form>
+
+      <form id="sign-in-form">
+        <legend> Sign in: </legend>
+        <input required type="email" name="credentials[email]" placeholder="Enter Email" />
+        <input required type="password" name="credentials[password]" placeholder="Enter Password" />
+        <input type="submit" class="btn btn-primary" />
+        <br />
+      </form>
+
+      <div class="title">
+          <div><h1 class="top-heading">Tic Tac Toe</h1></div>
+          <div class="game-title"><button id="reset-game-board" type="button" class="title btn btn-primary hidden">New Game</button></div>
+          <div class="display-message2"> </div>
+      </div>
+      <br />
+      <br />
+      <div class="game-board-wrapper">
+        <div class="container game-container hidden">
+          <div class="row">
+            <div id="0" class="col-4 box game-board" data-cell-index='0'>  </div>
+            <div id="1" class="col-4 box game-board" data-cell-index='1'>  </div>
+            <div id="2" class="col-4 box game-board" data-cell-index='2'>  </div>
+          </div>
+          <div class="row">
+            <div id="3" class="col-4 box game-board" data-cell-index='3'>  </div>
+            <div id="4" class="col-4 box game-board" data-cell-index='4'>  </div>
+            <div id="5" class="col-4 box game-board" data-cell-index='5'>  </div>
+          </div>
+          <div class="row">
+            <div id="6" class="col-4 box game-board" data-cell-index='6'>  </div>
+            <div id="7" class="col-4 box game-board" data-cell-index='7'>  </div>
+            <div id="8" class="col-4 box game-board" data-cell-index='8'>  </div>
+          </div>
+        </div>
+      </div>
+    <div class="container alert-container">
+      <div class="row">
+        <div class="col-3 box game-alert game-alert1 hidden">
+        </div>
+
+        <div class="col-3 box game-alert game-alert4 hidden">
+        </div>
+        <div class="col-3 box game-alert game-alert3 hidden">
+        </div>
+
+        <div class="col-3 box game-alert game-alert2 hidden">
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+    </div>
+    <br />
+
+    <div class="game-details hidden">
+      <h3> Game ID:  </h3>
+      <p class="game-id"> </p>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div>
+      <button id="games-played" type="button" class="btn btn-primary hidden">Get my player stats</button>
+    </div>
+
+    <br />
+
+    <div class="game-stats hidden">
+        <h3>Games played: </h3>
+        <p class="games"> </p>
+    </div>
+
+    <br />
+    <br />
+
+    <form id="change-password-form" class="hidden">
+      <legend> Change password: </legend>
+      <input required type="password" name="passwords[old]" placeholder="Enter Old Password" />
+      <input required type="password" name="passwords[new]" placeholder="Enter New Password" />
+      <input type="submit" class="btn btn-primary" />
+      <br />
+      <br />
+    </form>
+
+    <button id="sign-out-button" class="hidden"> Sign Out </button>
+    <br />
+    <div class="col-4 box sign-out"><h2 id="password-message"></h2></div>
+
+</html>
