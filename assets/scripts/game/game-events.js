@@ -5,6 +5,49 @@ const gameAPI = require('./game-api.js')
 const gameAPIEvents = require('./game-api-events.js')
 const gameAlertUI = require('./game-alert-ui.js')
 
+// Create empty board; reenable click listener for subsequent games
+const resetGameBoard = function () {
+  $('.game-board').off('click')
+  $('.game-board').on('click', cellClicked)
+
+  // create object in store for the currentPlayer
+  const currentPlayer = 'x'
+  store.gameState = {
+    player: currentPlayer
+  }
+
+  $('.game-container').removeClass('hidden')
+  $('.display-message2').html('')
+  $('.game-alert1').html('')
+  $('.game-alert2').html('')
+  $('.game-alert3').html('')
+  $('.game-alert4').html('')
+  $('.game-alert1').html(`It is ${currentPlayer}'s turn`)
+
+  // send create game call to API
+  gameAPI.createGame()
+    .then(gameAPIEvents.newGameCreated)
+    .catch(gameAPIEvents.newGameCreatedFailure)
+
+  return store.gameState
+}
+
+// Function to start game logic cascade
+const cellClicked = function (event) {
+  // set game index variable using the data attribute
+  const gameIndex = event.target.getAttribute('data-cell-index')
+
+  // get currentPlayer and board from the store
+  const currentPlayer = store.gameState.player
+  const gameBoardAPI = store.game.cells
+
+  // store the gameIndex from the HTML element for further game logic
+  store.gameState.gameIndex = gameIndex
+
+  // check to make sure game cell is not occupied by calling checkGameCell function
+  checkGameCell(currentPlayer, store.gameState.gameIndex, gameBoardAPI)
+}
+
 // If any game tile is not empty, do not allow click to change
 const checkGameCell = function (currentPlayer, gameIndex, gameBoardAPI) {
   // check if cell is occupied by either player; alert if so
@@ -50,81 +93,34 @@ const checkForWin = function (currentPlayer) {
   // if yes, test to see if any row, column, or cross on the coordinates grid
   // has the same string
   if (gameBoardElements.length >= 3) {
+    // function to alert if there is a winner
+    const youWin = function () {
+      $('.game-alert1').html('')
+      $('.game-alert3').show()
+      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
+      $('.game-board').off('click')
+      gameAPI.finishGame(store.game.id)
+        .then(gameAlertUI.gameFinishSuccess)
+        .catch(gameAlertUI.gameFinishFailure)
+    }
     // test rows, columns, then crosses, then for draw
     if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2]) {
-      // console.log(gameBoard[0] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[3] !== '' && gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5]) {
-      // console.log(gameBoard[3] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[6] !== '' && gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8]) {
-      // console.log(gameBoard[6] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6]) {
-      // console.log(gameBoard[0] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[1] !== '' && gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7]) {
-      // console.log(gameBoard[1] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8]) {
-      // console.log(gameBoard[2] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[0] !== '' && gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8]) {
-      // console.log(gameBoard[0] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoard[2] !== '' && gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6]) {
-      // console.log(gameBoard[2] + ' wins!')
-      $('.game-alert1').html('')
-      $('.game-alert3').show()
-      $('.game-alert3').html(`${currentPlayer} wins!   Click "New Game" to play again.`)
-      $('.game-board').off('click')
-      gameAPI.finishGame(store.game.id)
-        .then(gameAlertUI.gameFinishSuccess)
-        .catch(gameAlertUI.gameFinishFailure)
+      youWin()
     } else if (gameBoardElements.length === 9) {
-      // console.log('Draw!  The board is full.')
       $('.game-alert1').html('')
       $('.game-alert3').show()
       $('.game-alert3').html('Draw!  The board is full.  Click "New Game" to play again.')
@@ -148,56 +144,11 @@ const changePlayer = function (currentPlayer) {
   if (currentPlayer === 'x') {
     store.gameState.player = 'o'
     $('.game-alert1').html(`It is ${store.gameState.player}'s turn`)
-    // console.log(currentPlayer + ' after player check')
   } else {
     store.gameState.player = 'x'
     $('.game-alert1').html(`It is ${store.gameState.player}'s turn`)
-    // console.log(currentPlayer + ' after player check')
   }
   return currentPlayer
-}
-
-// Function to start game logic cascade
-const cellClicked = function (event) {
-  // set game index variable using the data attribute
-  const gameIndex = event.target.getAttribute('data-cell-index')
-
-  // get currentPlayer and board from the store
-  const currentPlayer = store.gameState.player
-  const gameBoardAPI = store.game.cells
-
-  // store the gameIndex from the HTML element for further game logic
-  store.gameState.gameIndex = gameIndex
-
-  // check to make sure game cell is not occupied by calling checkGameCell function
-  checkGameCell(currentPlayer, store.gameState.gameIndex, gameBoardAPI)
-}
-
-// Create empty board; reenable click listener for subsequent games
-const resetGameBoard = function () {
-  $('.game-board').off('click')
-  $('.game-board').on('click', cellClicked)
-
-  // create object in store for the currentPlayer
-  const currentPlayer = 'x'
-  store.gameState = {
-    player: currentPlayer
-  }
-
-  $('.game-container').removeClass('hidden')
-  $('.display-message2').html('')
-  $('.game-alert1').html('')
-  $('.game-alert2').html('')
-  $('.game-alert3').html('')
-  $('.game-alert4').html('')
-  $('.game-alert1').html(`It is ${currentPlayer}'s turn`)
-
-  // send create game call to API
-  gameAPI.createGame()
-    .then(gameAPIEvents.newGameCreated)
-    .catch(gameAPIEvents.newGameCreatedFailure)
-
-  return store.gameState
 }
 
 // get details about games played (started) for current player ID
