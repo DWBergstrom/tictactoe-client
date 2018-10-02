@@ -14,7 +14,7 @@ Next, auth:  I made sure the authentication events were functioning correctly (s
 
 Finally, I tied in the game API and rolled it into the local game logic, as well as into the UI events.
 
-Wireframe and user stories:
+### Wireframe and user stories:
 + [wireframe] (https://drive.google.com/file/d/1Qno1IxoMvwtiHDbqi2QBDZRj0MfcRASS)
 + User stories:
   - As a user, I can:
@@ -28,18 +28,18 @@ Wireframe and user stories:
     - see how many games I have played
     - save my played games to a server
 
-Some roadblocks I encountered:
+### Some roadblocks I encountered:
 + making sure that local game logic flowed properly once game API events were tied in (watching out for asynchronous issues)
 + making sure to structure each JS file for a given purpose (auth, ui, etc.)
 + CSS styling, especially positioning
 
-Technologies used:
+### Technologies used:
 + JavaScript for the game logic
 + AJAX calls to the Ruby backend api
 + curl for testing API calls
 + HTML and CSS for styling (including bootstrap)
 
-Issues to resolve as well as planned improvements:
+### Issues to resolve as well as planned improvements:
 + ensure that each function is appropriately located in each JS file (these could most likely be somewhat condensed in my project)
 + ensure gameBoard naming is consistent, and that the local copy is readily discernible from the API copy
 + Improve game statistics (games completed)
